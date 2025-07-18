@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>長音ミニマルペア教材</title>
+    <style>
+        body { font-family: sans-serif; padding: 1em; max-width: 600px; margin: auto; }
+        .section { margin-bottom: 2em; }
+        .practice-list { display: flex; flex-wrap: wrap; justify-content: center; }
+        .practice-row { display: flex; justify-content: center; margin-bottom: 1em; }
+        .practice-item { display: flex; flex-direction: column; align-items: center; margin: 0 1em; }
+        .practice-item img { max-width: 150px; height: auto; }
+        .practice-item button { font-size: 1.5em; padding: 0.5em 1em; }
+        .sentence-drill img { max-width: 120px; height: auto; margin-bottom: 0.5em; }
+    </style>
+</head>
+<body>
+    <h1>長音ミニマルペア教材</h1>
+
+    <div class="section" id="explanation">
+        <h2>1. 説明</h2>
+        <p>日本語の長音（ちょうおん）は母音を長く発音することです。例えば「地図（map）」と「チーズ（cheese）」の違いです。</p>
+    </div>
+
+    <div class="section" id="practice">
+        <h2>2. 練習</h2>
+        <div class="practice-list">
+            <div class="practice-row">
+                <div class="practice-item">
+                    <img src="map.png" alt="地図の画像">
+                    <button onclick="playSound('chizu')">地図</button>
+                </div>
+                <div class="practice-item">
+                    <img src="cheese.png" alt="チーズの画像">
+                    <button onclick="playSound('chiizu')">チーズ</button>
+                </div>
+            </div>
+            <div class="practice-row">
+                <div class="practice-item">
+                    <img src="suteki.png" alt="素敵な風景">
+                    <button onclick="playSound('suteki')">素敵</button>
+                </div>
+                <div class="practice-item">
+                    <img src="suteeki.png" alt="ステーキの画像">
+                    <button onclick="playSound('suteeki')">ステーキ</button>
+                </div>
+            </div>
+            <div class="practice-row">
+                <div class="practice-item">
+                    <img src="suki.png" alt="好きなもの">
+                    <button onclick="playSound('suki')">好き</button>
+                </div>
+                <div class="practice-item">
+                    <img src="sukii.png" alt="スキーの画像">
+                    <button onclick="playSound('sukii')">スキー</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <div class="section sentence-drill" id="sentence-drill">
+        <h2>3. ドリル</h2>
+        <p>次の文を読んで、正しい単語を選んでください。</p>
+        <p>例文1: 〇〇バーガー<br>
+        <img src="cheeseburger.png" alt="チーズバーガーの画像"><br>
+        <input type="radio" name="q3" value="チーズ"> チーズ
+        <input type="radio" name="q3" value="地図"> 地図
+        <div>
+            <button onclick="playSound('cheeseburger')">問題を聞く</button>
+        </div>
+       
+        </p>
+        <p>例文2: 私はね、実は君のことが〇〇。<br>
+        <img src="love.png" alt="ハートマークの画像"><br>
+        <input type="radio" name="q4" value="好き"> 好き
+        <input type="radio" name="q4" value="スキー"> スキー
+       
+        <div>
+            <button onclick="playSound('love')">問題を聞く</button>
+        </div>
+        </p>
+        <p>例文3: 君と会ってからこの世界が〇〇に見えた。<br>
+        <img src="daisuki.png" alt="美しい景色の画像"><br>
+        <input type="radio" name="q5" value="素敵"> 素敵
+        <input type="radio" name="q5" value="ステーキ"> ステーキ
+        <div>
+            <button onclick="playSound('daisuki')">問題を聞く</button>
+        </div>
+       
+        </p>
+        <button onclick="checkAnswers()">答え合わせ</button>
+        <p id="result"></p>
+    </div>
+
+    <script>
+        function playSound(file) {
+            const audio = new Audio(file + '.mp3');
+            audio.play();
+        }
+
+        function checkAnswers() {
+            const answers = {
+                q3: "チーズ",
+                q4: "好き",
+                q5: "素敵"
+            };
+            let correct = 0;
+            for (let key in answers) {
+                const radios = document.getElementsByName(key);
+                for (let radio of radios) {
+                    if (radio.checked && radio.value === answers[key]) {
+                        correct++;
+                    }
+                }
+            }
+            document.getElementById("result").innerText = `正解数: ${correct} / 3`;
+        }
+    </script>
+</body>
+</html>
